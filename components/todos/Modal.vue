@@ -52,7 +52,7 @@ const closeModal = (): void => {
             >
               <DialogTitle
                 as="h3"
-                class="text-lg font-bold leading-6"
+                class="text-lg font-bold leading-6 text-primary"
               >
                 Add new framework
               </DialogTitle>
@@ -64,13 +64,13 @@ const closeModal = (): void => {
               </div>
 
               <div class="mt-6">
-                <input type="text" class="p-3 w-full rounded-md border border-gray-300">
+                <input type="text" class="p-3 w-full rounded-md border border-primary">
               </div>
 
               <div class="mt-4">
                 <button
                   type="button"
-                  class="inline-flex w-full justify-center rounded-md border border-transparent bg-[#111828] text-white px-4 py-2 text-sm font-medium hover:bg-[#282f3d] focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  class="inline-flex w-full justify-center rounded-md border border-transparent bg-primary text-white px-4 py-2 text-sm font-medium hover:bg-[#282f3d] focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                   @click="closeModal"
                 >
                   Submit

@@ -7,7 +7,6 @@ definePageMeta({
 });
 
 const isAuthenticating = useState("isAuthenticating", () => false);
-console.log(userID)
 
 const loginWithGithub = async (): Promise<void> => {
   isAuthenticating.value = !isAuthenticating?.value;
