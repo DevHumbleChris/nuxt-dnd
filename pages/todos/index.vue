@@ -1,39 +1,49 @@
-<script setup lang="ts">
+<script setup>
 import TodoModal from "~/components/todos/Modal.vue";
 import { useTodosStore } from "~/stores/todos";
 import draggable from "vuedraggable";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 useHead({
   title: "Todos - Nuxt DnD",
 });
 
+const { userID } = await getUserID();
+
 const todosStore = useTodosStore();
 
-const openModal = (): void => {
-  console.log('hello')
+const openModal = () => {
+  console.log("hello");
   todosStore?.openTodoModal();
 };
 
-const items = useState("items", () => {
-  return [
-    {
-      id: 1,
-      name: "Ben",
-    },
-    {
-      id: 2,
-      name: "Chris",
-    },
-    {
-      id: 3,
-      name: "Chrdsis",
-    },
-  ];
+const todos = useState("todos", () => []);
+watchEffect(() => {
+  if (process.client) {
+    const { db } = firebaseConfig();
+    const q = query(
+      collection(db, "users", userID, "todos"),
+      orderBy("timestamp", "desc")
+    );
+    const unsub = onSnapshot(q, (querySnapshot) => {
+      const userTodos = [];
+      querySnapshot.forEach((doc) => {
+        userTodos?.push({ ...doc.data(), id: doc.id });
+      });
+      todos.value = userTodos.filter(
+        (userTodo) => userTodo?.user.githubID === userID
+      );
+    });
+    return () => unsub();
+  }
 });
 </script>
 
 <template>
   <div class="max-w-xl sm:mx-auto mt-[10rem] mx-2 space-y-3">
-    <NuxtLink to="/" class="flex items-center gap-2 justify-center text-primary font-bold">
+    <NuxtLink
+      to="/"
+      class="flex items-center gap-2 justify-center text-primary font-bold"
+    >
       <Icon name="solar:home-linear" class="w-5 h-auto" />
       <p>Home</p>
     </NuxtLink>
@@ -41,7 +51,7 @@ const items = useState("items", () => {
       <div class="space-y-4">
         <div>
           <div class="flex items-center justify-between">
-            <h1 class="text-xl font-bold text-primary">Frameworks</h1>
+            <h1 class="text-xl font-bold text-primary">Your Todos</h1>
             <button
               @click="openModal"
               class="block rounded-md p-2 border hover:border-gray-600"
@@ -53,11 +63,11 @@ const items = useState("items", () => {
             </button>
             <TodoModal />
           </div>
-          <p class="text-gray-500">List Popular web development frameworks</p>
+          <p class="text-gray-500">Below is the list for your created todos.</p>
         </div>
-        <div class="space-y-3">
+        <div class="space-y-3" v-if="todos?.length > 0">
           <draggable
-            :list="items"
+            :list="todos"
             item-key="id"
             class="space-y-2"
             :component-data="{ name: 'fade' }"
@@ -82,12 +92,13 @@ const items = useState("items", () => {
                 :delay="200"
                 class="flex items-center justify-between p-3 border rounded-md group"
               >
-                <p>{{ element.name }}</p>
+                <p>{{ element?.title }}</p>
                 <div class="flex items-center gap-2">
-                  <button
-                    class="hidden group-hover:block"
-                  >
-                    <Icon name="ic:round-close" class="w-4 h-auto text-red-600" />
+                  <button class="hidden group-hover:block">
+                    <Icon
+                      name="ic:round-close"
+                      class="w-4 h-auto text-red-600"
+                    />
                   </button>
                   <button class="block cursor-grabbing">
                     <Icon
@@ -99,6 +110,9 @@ const items = useState("items", () => {
               </div>
             </template>
           </draggable>
+        </div>
+        <div v-else class="text-gray-500 text-center">
+          <p>No Created todos.</p>
         </div>
       </div>
     </div>

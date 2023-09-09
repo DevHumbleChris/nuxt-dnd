@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@vueuse/motion/nuxt",
     "@sidebase/nuxt-auth",
-    '@nuxt/image'
+    "@nuxt/image",
   ],
   tailwindcss: {
     cssPath: "~/assets/css/tailwind.css",
@@ -19,9 +19,9 @@ export default defineNuxtConfig({
         },
         extend: {
           colors: {
-            primary: '#45196e'
-          }
-        }
+            primary: "#45196e",
+          },
+        },
       },
     },
   },
@@ -40,7 +40,14 @@ export default defineNuxtConfig({
     public: {
       gitHubClientID: process.env.GITHUB_CLIENT_ID,
       gitHubClientSecret: process.env.GITHUB_CLIENT_SECRET,
-      NUXT_AUTH_SECRET: process.env.NUXT_AUTH_SECRET
+      NUXT_AUTH_SECRET: process.env.NUXT_AUTH_SECRET,
+      FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
+      FIREBASE_AUTH_DOMAIN: process.env.FIREBASE_AUTH_DOMAIN,
+      FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID,
+      FIREBASE_STORAGE_BUCKET: process.env.FIREBASE_STORAGE_BUCKET,
+      FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
+      FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
+      FIREBASE_MEASUREMENT_ID: process.env.FIREBASE_MEASUREMENT_ID,
     },
   },
   auth: {

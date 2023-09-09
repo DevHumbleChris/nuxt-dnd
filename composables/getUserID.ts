@@ -1,5 +1,5 @@
 interface User {
-  userID: number | null;
+  userID: string | null;
 }
 
 export const getUserID = async (): Promise<User> => {
@@ -10,7 +10,7 @@ export const getUserID = async (): Promise<User> => {
     const firstSplit = data?.image?.split("/u");
     const secondSplit = firstSplit[firstSplit?.length - 1].split("?");
     const secSplit = secondSplit[0].split("/");
-    const userID = parseInt(secSplit[secSplit.length - 1]);
+    const userID = secSplit[secSplit.length - 1];
 
     return {
       userID,
