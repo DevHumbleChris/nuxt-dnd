@@ -8,7 +8,7 @@ definePageMeta({ title: "Nuxt DnD ( Drag And Drop )", auth: false });
       <nuxt-img src="/images/outer-space.jpg" alt="outer-space" class="w-full h-full object-cover" />
     </div>
     <div
-      class="p-5 md:p-10 space-y-2"
+      class="p-5 md:p-10 space-y-3"
     >
       <div class="flex items-center flex-wrap gap-2 justify-center">
         <NuxtLink to="https://github.com/DevHumbleChris/nuxt-dnd" target="_blank">
@@ -25,7 +25,7 @@ definePageMeta({ title: "Nuxt DnD ( Drag And Drop )", auth: false });
           />
         </NuxtLink>
       </div>
-      <div class="border rounded-lg">
+      <div class="border rounded-lg shadow-xl">
         <div
           class="p-5 border-b flex items-center flex-wrap gap-3 justify-between"
         >
