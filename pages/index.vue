@@ -1,17 +1,50 @@
-<script setup>
-definePageMeta({ title: "Nuxt DnD ( Drag And Drop )", auth: false });
+<script setup lang="ts">
+const { signIn, status, signOut } = useAuth();
+const { userID } = await getUserID();
+definePageMeta({
+  title: "Nuxt DnD ( Drag And Drop )",
+  auth: false,
+});
+
+const isAuthenticating = useState("isAuthenticating", () => false);
+console.log(userID)
+
+const loginWithGithub = async (): Promise<void> => {
+  isAuthenticating.value = !isAuthenticating?.value;
+  try {
+    await signIn("github", { callbackUrl: "/" });
+    isAuthenticating.value = !isAuthenticating?.value;
+  } catch (err) {
+    isAuthenticating.value = !isAuthenticating?.value;
+  }
+};
+
+const logOut = async (): Promise<void> => {
+  isAuthenticating.value = !isAuthenticating?.value;
+  try {
+    await signOut({ callbackUrl: "/" });
+    isAuthenticating.value = !isAuthenticating?.value;
+  } catch (err) {
+    isAuthenticating.value = !isAuthenticating?.value;
+  }
+};
 </script>
 
 <template>
   <section class="grid md:grid-cols-2 items-center mb-10 md:mb-0">
     <div class="h-[12rem] md:h-screen">
-      <nuxt-img src="/images/outer-space.jpg" alt="outer-space" class="w-full h-full object-cover" />
+      <nuxt-img
+        src="/images/outer-space.jpg"
+        alt="outer-space"
+        class="w-full h-full object-cover"
+      />
     </div>
-    <div
-      class="p-5 md:p-10 space-y-3"
-    >
+    <div class="p-5 md:p-10 space-y-3">
       <div class="flex items-center flex-wrap gap-2 justify-center">
-        <NuxtLink to="https://github.com/DevHumbleChris/nuxt-dnd" target="_blank">
+        <NuxtLink
+          to="https://github.com/DevHumbleChris/nuxt-dnd"
+          target="_blank"
+        >
           <Icon
             name="codicon:github-inverted"
             class="w-5 h-auto text-[#111828] hover:text-primary"
@@ -29,16 +62,44 @@ definePageMeta({ title: "Nuxt DnD ( Drag And Drop )", auth: false });
         <div
           class="p-5 border-b flex items-center flex-wrap gap-3 justify-between"
         >
-          <h1 class="font-extrabold text-xl text-primary">Nuxt DnD</h1>
+          <div>
+            <h1 class="font-extrabold text-xl text-primary">Nuxt DnD</h1>
+            <p v-if="userID" class="text-sm text-primary font-semibold">GitHub ID: {{ userID }}</p>
+          </div>
+
           <button
+            v-if="status === 'authenticated'"
+            @click="logOut"
             class="flex items-center bg-primary hover:bg-[#282f3d] text-white p-2 rounded-md gap-2"
           >
-            <Icon name="codicon:github-inverted" class="w-5 h-auto" />
-            <p>Login with GitHub</p>
+            <div
+              v-if="isAuthenticating"
+              class="w-5 h-5 border-2 border-dashed rounded-full animate-spin text-white"
+            ></div>
+            <Icon v-else name="charm:sign-out" class="w-5 h-auto" />
+            <p>
+              {{ isAuthenticating ? "Authenticating" : "Logout" }}
+            </p>
+          </button>
+          <button
+            v-else
+            @click="loginWithGithub"
+            class="flex items-center bg-primary hover:bg-[#282f3d] text-white p-2 rounded-md gap-2"
+          >
+            <div
+              v-if="isAuthenticating"
+              class="w-5 h-5 border-2 border-dashed rounded-full animate-spin text-white"
+            ></div>
+            <Icon v-else name="codicon:github-inverted" class="w-5 h-auto" />
+            <p>
+              {{ isAuthenticating ? "Authenticating" : "Login with GitHub" }}
+            </p>
           </button>
         </div>
         <div class="p-5 space-y-3">
-          <h2 class="font-semibold text-primary">Welcome to Nuxt DnD ( Drag and Drop ).</h2>
+          <h2 class="font-semibold text-primary">
+            Welcome to Nuxt DnD ( Drag and Drop ).
+          </h2>
           <p>
             A
             <NuxtLink
@@ -48,8 +109,8 @@ definePageMeta({ title: "Nuxt DnD ( Drag And Drop )", auth: false });
               >Nuxt</NuxtLink
             >
             demo app, implementing the drag and drop functionality. Below
-            <Icon name="twemoji:backhand-index-pointing-down" /> is the navigation
-            guide:
+            <Icon name="twemoji:backhand-index-pointing-down" /> is the
+            navigation guide:
           </p>
           <div class="space-y-2">
             <div class="flex items-center flex-wrap gap-2">
