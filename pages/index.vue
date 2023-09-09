@@ -3,7 +3,7 @@ definePageMeta({ title: "Nuxt DnD ( Drag And Drop )", auth: false });
 </script>
 
 <template>
-  <section class="grid md:grid-cols-2 items-center mb-10">
+  <section class="grid md:grid-cols-2 items-center mb-10 md:mb-0">
     <div class="h-[12rem] md:h-screen">
       <nuxt-img src="/images/outer-space.jpg" alt="outer-space" class="w-full h-full object-cover" />
     </div>
