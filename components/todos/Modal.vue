@@ -11,7 +11,7 @@ import { useTodosStore } from "~/stores/todos";
 import { toast } from "vue3-toastify";
 
 const todosStore = useTodosStore();
-
+const { db } = firebaseConfig();
 const isAddingTodo = useState("isAddingTodo", () => false);
 const { userID } = await getUserID();
 const userData = user();
@@ -35,23 +35,20 @@ const addTodo = async () => {
       })
     }
     isAddingTodo.value = !isAddingTodo?.value;
-    if (process.client) {
-      const { db } = firebaseConfig();
-      await addDoc(collection(db, "users", userID, "todos"), {
-        title: todo.value,
-        isCompleted: false,
-        user: {
-          githubID: userID,
-          name: userData?.name,
-          photoURL: userData?.image,
-          email: userData?.email,
-        },
-        timestamp: serverTimestamp(),
-      });
-      isAddingTodo.value = !isAddingTodo?.value;
-      todo.value = "";
-      todosStore?.openTodoModal();
-    }
+    await addDoc(collection(db, "users", userID, "todos"), {
+      title: todo.value,
+      isCompleted: false,
+      user: {
+        githubID: userID,
+        name: userData?.name,
+        photoURL: userData?.image,
+        email: userData?.email,
+      },
+      timestamp: serverTimestamp(),
+    });
+    isAddingTodo.value = !isAddingTodo?.value;
+    todo.value = "";
+    todosStore?.openTodoModal();
   } catch (err) {
     isAddingTodo.value = !isAddingTodo?.value;
     console.log(err);

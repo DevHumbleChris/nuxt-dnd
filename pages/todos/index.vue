@@ -8,6 +8,7 @@ useHead({
 });
 
 const { userID } = await getUserID();
+const { db } = firebaseConfig();
 
 const todosStore = useTodosStore();
 
@@ -18,23 +19,20 @@ const openModal = () => {
 
 const todos = useState("todos", () => []);
 watchEffect(() => {
-  if (process.client) {
-    const { db } = firebaseConfig();
-    const q = query(
-      collection(db, "users", userID, "todos"),
-      orderBy("timestamp", "desc")
-    );
-    const unsub = onSnapshot(q, (querySnapshot) => {
-      const userTodos = [];
-      querySnapshot.forEach((doc) => {
-        userTodos?.push({ ...doc.data(), id: doc.id });
-      });
-      todos.value = userTodos.filter(
-        (userTodo) => userTodo?.user.githubID === userID
-      );
+  const q = query(
+    collection(db, "users", userID, "todos"),
+    orderBy("timestamp", "desc")
+  );
+  const unsub = onSnapshot(q, (querySnapshot) => {
+    const userTodos = [];
+    querySnapshot.forEach((doc) => {
+      userTodos?.push({ ...doc.data(), id: doc.id });
     });
-    return () => unsub();
-  }
+    todos.value = userTodos.filter(
+      (userTodo) => userTodo?.user.githubID === userID
+    );
+  });
+  return () => unsub();
 });
 </script>
 
