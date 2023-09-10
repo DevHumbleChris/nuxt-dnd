@@ -49,6 +49,10 @@ const addTodo = async () => {
     isAddingTodo.value = !isAddingTodo?.value;
     todo.value = "";
     todosStore?.openTodoModal();
+    toast('Bingo! Todo is added.', {
+      type: 'info',
+      theme: 'colored'
+    })
   } catch (err) {
     isAddingTodo.value = !isAddingTodo?.value;
     console.log(err);

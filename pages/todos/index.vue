@@ -3,6 +3,8 @@ import TodoModal from "~/components/todos/Modal.vue";
 import { useTodosStore } from "~/stores/todos";
 import draggable from "vuedraggable";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import Todo from "~/components/todos/Todo.vue";
+
 useHead({
   title: "Todos - Nuxt DnD",
 });
@@ -13,7 +15,6 @@ const { db } = firebaseConfig();
 const todosStore = useTodosStore();
 
 const openModal = () => {
-  console.log("hello");
   todosStore?.openTodoModal();
 };
 
@@ -71,41 +72,7 @@ watchEffect(() => {
             :component-data="{ name: 'fade' }"
           >
             <template #item="{ element }">
-              <div
-                v-motion
-                :initial="{ opacity: 0, y: 100 }"
-                :enter="{
-                  opacity: 1,
-                  y: 0,
-                  scale: 1,
-                  transition: {
-                    type: 'spring',
-                    stiffness: 250,
-                    damping: 25,
-                    mass: 0.5,
-                  },
-                }"
-                :hovered="{ opacity: 1 }"
-                :tapped="{ opacity: 0 }"
-                :delay="200"
-                class="flex items-center justify-between p-3 border rounded-md group"
-              >
-                <p>{{ element?.title }}</p>
-                <div class="flex items-center gap-2">
-                  <button class="hidden group-hover:block">
-                    <Icon
-                      name="ic:round-close"
-                      class="w-4 h-auto text-red-600"
-                    />
-                  </button>
-                  <button class="block cursor-grabbing">
-                    <Icon
-                      name="ic:round-drag-indicator"
-                      class="w-4 h-auto text-primary"
-                    />
-                  </button>
-                </div>
-              </div>
+              <Todo :todo="element" />
             </template>
           </draggable>
         </div>
