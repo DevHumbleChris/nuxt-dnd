@@ -114,11 +114,11 @@ const logOut = async (): Promise<void> => {
           <div class="space-y-2">
             <div class="flex items-center flex-wrap gap-2">
               <NuxtLink
-                to="/todos"
+                to="/taskie"
                 class="text-primary font-semibold hover:underline"
-                >/todos</NuxtLink
+                >/taskie</NuxtLink
               >
-              <p>: simple todo with DnD functionality.</p>
+              <p>: explore the cool way of managing your tasks.</p>
             </div>
             <div class="flex items-center flex-wrap gap-2">
               <NuxtLink
