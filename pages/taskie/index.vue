@@ -1,9 +1,10 @@
 <script setup>
-useHead({
-    title: 'Kanban Board - Nuxt DnD'
-})
+definePageMeta({
+  layout: "custom",
+  title: "Kanban Board - Nuxt DnD",
+});
 </script>
 
 <template>
-    <section>Coming soon</section>
+  <section>hello</section>
 </template>

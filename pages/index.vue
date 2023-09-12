@@ -63,7 +63,9 @@ const logOut = async (): Promise<void> => {
         >
           <div>
             <h1 class="font-extrabold text-xl text-primary">Nuxt DnD</h1>
-            <p v-if="userID" class="text-sm text-primary font-semibold">GitHub ID: {{ userID }}</p>
+            <p v-if="userID" class="text-sm text-primary font-semibold">
+              GitHub ID: {{ userID }}
+            </p>
           </div>
 
           <button
@@ -114,19 +116,19 @@ const logOut = async (): Promise<void> => {
           <div class="space-y-2">
             <div class="flex items-center flex-wrap gap-2">
               <NuxtLink
+                to="/todos"
+                class="text-primary font-semibold hover:underline"
+                >/todos</NuxtLink
+              >
+              <p>: simple todo with DnD functionality.</p>
+            </div>
+            <div class="flex items-center flex-wrap gap-2">
+              <NuxtLink
                 to="/taskie"
                 class="text-primary font-semibold hover:underline"
                 >/taskie</NuxtLink
               >
               <p>: explore the cool way of managing your tasks.</p>
-            </div>
-            <div class="flex items-center flex-wrap gap-2">
-              <NuxtLink
-                to="/board"
-                class="text-primary font-semibold hover:underline"
-                >/board</NuxtLink
-              >
-              <p>: simple Kanban Board with DnD functionality.</p>
             </div>
           </div>
           <hr />
