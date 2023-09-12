@@ -64,5 +64,11 @@ const image = computed(() => {
                 </li>
             </ul>
         </div>
+        <div class="absolute bottom-0 right-0 left-0">
+            <NuxtLink to="#" class="flex items-center gap-2 px-5 py-3 hover:bg-[#f5f6f8]">
+                <Icon name="charm:sign-out" class="w-5 h-auto" />
+                <p>Logout</p>
+            </NuxtLink>
+        </div>
     </aside>
 </template>
