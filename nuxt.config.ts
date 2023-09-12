@@ -23,6 +23,7 @@ export default defineNuxtConfig({
         extend: {
           colors: {
             primary: "#45196e",
+            taskie: '#f29456'
           },
         },
       },

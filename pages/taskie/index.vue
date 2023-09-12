@@ -1,7 +1,7 @@
 <script setup>
 definePageMeta({
   layout: "custom",
-  title: "Kanban Board - Nuxt DnD",
+  title: "Taskie - Nuxt DnD",
 });
 </script>
 
