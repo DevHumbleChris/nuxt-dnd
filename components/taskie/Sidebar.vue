@@ -21,9 +21,9 @@ const image = computed(() => {
       <li class="hover:bg-[#f5f6f8] p-2 rounded-md">
         <NuxtLink
           to="/taskie/dashboard"
-          class="flex items-center gap-2 test-taskie font-bold"
+          class="flex items-center gap-2 text-taskie font-bold"
         >
-          <Icon name="ph:user-bold" class="w-5 h-auto" />
+          <Icon name="bxs:grid-alt" class="w-5 h-auto" />
           <p>Dashboard</p>
         </NuxtLink>
       </li>
@@ -46,7 +46,7 @@ const image = computed(() => {
           </NuxtLink>
         </li>
         <li class="hover:bg-[#f5f6f8] p-2 rounded-md">
-          <NuxtLink to="#" class="flex items-center gap- text-taskie font-bold">
+          <NuxtLink to="#" class="flex items-center gap-2 text-taskie font-bold">
             <Icon name="ph:user-bold" class="w-5 h-auto" />
             <p>Personal</p>
           </NuxtLink>
@@ -91,7 +91,7 @@ const image = computed(() => {
             to="#"
             class="flex items-center gap-2 px-5 py-3 hover:bg-[#f5f6f8] text-taskie font-bold"
           >
-            <Icon name="charm:sign-out" class="w-5 h-auto" />
+            <Icon name="material-symbols:settings-rounded" class="w-6 h-auto" />
             <p>Settings</p>
           </NuxtLink>
         </li>
