@@ -20,7 +20,7 @@
             type="text"
             placeholder="project name"
             id="projectName"
-            class="w-full bg-[#f9fafc] px-3 py-2 outline-none border-0 rounded-md focus:ring-2 focus:ring-taskie"
+            class="w-full bg-[#f9fafc] px-3 py-2 outline-none border rounded-md focus:ring-2 focus:ring-taskie"
           />
         </div>
         <div class="space-y-3">
@@ -28,7 +28,7 @@
           <select
             name="projectType"
             id="projectType"
-            class="w-full bg-[#f9fafc] px-3 py-2 outline-none border-0 rounded-md focus:ring-2 focus:ring-taskie"
+            class="w-full bg-[#f9fafc] px-3 py-2 outline-none border rounded-md focus:ring-2 focus:ring-taskie"
           >
             <option value="Public" selected>Public</option>
             <option value="Private">Private</option>
@@ -43,8 +43,17 @@
             id="description"
             cols="30"
             rows="5"
-            class="w-full bg-[#f9fafc] px-3 py-2 outline-none border-0 rounded-md focus:ring-2 focus:ring-taskie"
+            class="w-full bg-[#f9fafc] px-3 py-2 outline-none border rounded-md focus:ring-2 focus:ring-taskie"
           ></textarea>
+        </div>
+        <div>
+          <div>
+            <label for="iconKey">Icon Key</label>
+            <div>
+              <Icon name="material-symbols:add-circle-outline-rounded" />
+              
+            </div>
+          </div>
         </div>
       </form>
     </div>
