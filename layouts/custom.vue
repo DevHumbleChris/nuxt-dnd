@@ -1,5 +1,6 @@
 <script setup>
 import Sidebar from '~/components/taskie/Sidebar.vue'
+import CreateProject from '~/components/taskie/CreateProject.vue';
 const route = useRoute();
 useHead({
   htmlAttrs: {
@@ -29,10 +30,11 @@ useHead({
 
 
 <template>
-    <main class="flex">
+    <main class="relative flex">
         <Sidebar />
         <section class="w-full bg-[#f5f6f8]">
           <slot />
         </section>
+        <CreateProject />
     </main>
 </template>

@@ -124,7 +124,7 @@ const logOut = async (): Promise<void> => {
             </div>
             <div class="flex items-center flex-wrap gap-2">
               <NuxtLink
-                to="/taskie"
+                to="/taskie/dashboard"
                 class="text-primary font-semibold hover:underline"
                 >/taskie</NuxtLink
               >
