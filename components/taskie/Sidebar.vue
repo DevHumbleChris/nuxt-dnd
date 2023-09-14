@@ -1,9 +1,16 @@
 <script setup>
+import { useTaskieStore } from "~/stores/taskie";
+
+const taskieStore = useTaskieStore();
 const data = user();
 
 const image = computed(() => {
   return data?.image;
 });
+
+const openCreateProject = () => {
+  taskieStore?.setIsCreateProject()
+}
 </script>
 
 <template>
@@ -31,7 +38,7 @@ const image = computed(() => {
     <div class="space-y-4">
       <div class="flex items-center justify-between text-gray-400">
         <p class="text-sm">Your Projects</p>
-        <button>
+        <button @click="openCreateProject">
           <Icon name="ion:plus-round" class="text-taskie font-bold" />
         </button>
       </div>

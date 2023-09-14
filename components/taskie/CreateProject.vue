@@ -15,10 +15,23 @@ const projectDetails = useState("projectDetails", () => {
 const openGetIconModal = () => {
   taskieStore?.setGetIconModalOpen();
 };
+
+const isCreateProject = computed(() => {
+  return taskieStore?.isCreateProject;
+});
 </script>
 
 <template>
   <div
+    v-if="isCreateProject"
+    v-motion
+    :initial="{ opacity: 0, x: 100 }"
+    :enter="{ opacity: 1, x: 0 }"
+    :leave="{
+      x: -100,
+      opacity: 1
+    }"
+    :delay="200"
     class="fixed top-0 right-0 h-screen overflow-auto w-full sm:w-[30rem] bg-white rounded-l-2xl shadow-xl shadow-zinc-300/50 z-30"
   >
     <button class="block absolute top-3 left-3">
@@ -106,16 +119,16 @@ const openGetIconModal = () => {
             />
           </div>
         </div>
-        <div class="py-8 flex items-center justify-end gap-4">
-          <button
-            class="block py-2 px-4 text-sm border border-taskie-sec hover:border-0 hover:bg-taskie hover:text-white rounded-md"
-          >
-            Cancel
-          </button>
+        <div class="pt-4 flex items-center gap-4">
           <button
             class="block py-2 px-4 text-sm bg-taskie-sec text-white rounded-md hover:bg-taskie"
           >
             Create Project
+          </button>
+          <button
+            class="block py-2 px-4 text-sm border border-taskie-sec hover:border-0 hover:bg-taskie hover:text-white rounded-md"
+          >
+            Cancel
           </button>
         </div>
       </form>
