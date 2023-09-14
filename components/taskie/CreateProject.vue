@@ -1,5 +1,8 @@
 <script setup>
 import IconModal from "./IconModal.vue";
+import { useTaskieStore } from "~/stores/taskie";
+
+const taskieStore = useTaskieStore();
 const projectDetails = useState("projectDetails", () => {
   return {
     name: "",
@@ -8,6 +11,10 @@ const projectDetails = useState("projectDetails", () => {
     iconKey: "game-icons:cubeforce",
   };
 });
+
+const openGetIconModal = () => {
+  taskieStore?.setGetIconModalOpen();
+};
 </script>
 
 <template>
@@ -72,7 +79,10 @@ const projectDetails = useState("projectDetails", () => {
             <label for="iconKey" class="block font-semibold">Icon Key</label>
             <div class="flex items-center gap-3">
               <div>
-                <button class="block hover:text-taskie font-bold">
+                <button
+                  @click.prevent="openGetIconModal"
+                  class="block hover:text-taskie font-bold"
+                >
                   <Icon
                     name="material-symbols:add-circle-outline-rounded"
                     class="w-6 h-auto shrink-0"

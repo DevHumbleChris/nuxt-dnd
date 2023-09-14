@@ -1,3 +1,32 @@
+<script setup>
+import {
+  TransitionRoot,
+  TransitionChild,
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+} from "@headlessui/vue";
+import { useTaskieStore } from "~/stores/taskie";
+
+const taskieStore = useTaskieStore();
+
+const isOpen = computed(() => {
+  return taskieStore?.isGetIconModalOpen;
+});
+
+const iframeSrc = useState("iframeSrc", () => "");
+const isLoadingIframe = useState("isLoadingIframe", () => true);
+
+const handleIframeLoad = () => {
+  isLoadingIframe.value = false;
+  iframeSrc.value = "https://icones.js.org/collection/all";
+};
+
+function closeModal() {
+  taskieStore?.setGetIconModalOpen();
+}
+</script>
+
 <template>
   <TransitionRoot appear :show="isOpen" as="template">
     <Dialog as="div" @close="closeModal" class="relative z-50">
@@ -53,7 +82,7 @@
 
               <div
                 class="my-4 h-[18rem]"
-                :class="{ 'animate-pulse bg-slate-200 rounded-xl': isLoading }"
+                :class="{ 'animate-pulse bg-slate-200 rounded-xl': isLoadingIframe }"
               >
                 <iframe
                   @load="handleIframeLoad"
@@ -69,31 +98,3 @@
     </Dialog>
   </TransitionRoot>
 </template>
-
-<script setup>
-import { ref } from "vue";
-import {
-  TransitionRoot,
-  TransitionChild,
-  Dialog,
-  DialogPanel,
-  DialogTitle,
-} from "@headlessui/vue";
-
-const isOpen = ref(true);
-
-const iframeSrc = useState("iframeSrc", () => "");
-const isLoading = useState("isLoading", () => true);
-
-const handleIframeLoad = () => {
-  isLoading.value = false;
-  iframeSrc.value = "https://icones.js.org/collection/all";
-};
-
-function closeModal() {
-  isOpen.value = false;
-}
-function openModal() {
-  isOpen.value = true;
-}
-</script>
