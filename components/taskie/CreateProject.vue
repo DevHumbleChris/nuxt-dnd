@@ -1,4 +1,5 @@
 <script setup>
+import IconModal from "./IconModal.vue";
 const projectDetails = useState("projectDetails", () => {
   return {
     name: "",
@@ -70,12 +71,15 @@ const projectDetails = useState("projectDetails", () => {
           <div class="col-span-4 space-y-3">
             <label for="iconKey" class="block font-semibold">Icon Key</label>
             <div class="flex items-center gap-3">
-              <button class="block hover:text-taskie font-bold">
-                <Icon
-                  name="material-symbols:add-circle-outline-rounded"
-                  class="w-6 h-auto shrink-0"
-                />
-              </button>
+              <div>
+                <button class="block hover:text-taskie font-bold">
+                  <Icon
+                    name="material-symbols:add-circle-outline-rounded"
+                    class="w-6 h-auto shrink-0"
+                  />
+                </button>
+                <IconModal />
+              </div>
               <input
                 id="iconKey"
                 type="text"
@@ -93,8 +97,16 @@ const projectDetails = useState("projectDetails", () => {
           </div>
         </div>
         <div class="py-8 flex items-center justify-end gap-4">
-          <button class="block py-2 px-4 text-sm border border-taskie-sec hover:border-0 hover:bg-taskie hover:text-white rounded-md">Cancel</button>
-          <button class="block py-2 px-4 text-sm bg-taskie-sec text-white rounded-md hover:bg-taskie">Create Project</button>
+          <button
+            class="block py-2 px-4 text-sm border border-taskie-sec hover:border-0 hover:bg-taskie hover:text-white rounded-md"
+          >
+            Cancel
+          </button>
+          <button
+            class="block py-2 px-4 text-sm bg-taskie-sec text-white rounded-md hover:bg-taskie"
+          >
+            Create Project
+          </button>
         </div>
       </form>
     </div>
